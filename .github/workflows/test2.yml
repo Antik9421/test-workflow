@@ -26,6 +26,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Use repository variable
-        run: env
+        run: echo ${{ github }}
 
       
