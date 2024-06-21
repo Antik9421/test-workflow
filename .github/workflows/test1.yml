@@ -9,23 +9,29 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  
+  workflow_call:
+    # Map the workflow outputs to job outputs
+    outputs:
+      firstword:
+        description: "The first output string"
+        value: ${{ jobs.example_job.outputs.output1 }}
+      secondword:
+        description: "The second output string"
+        value: ${{ jobs.example_job.outputs.output2 }}
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  test1:
-    # The type of runner that the job will run on
+  example_job:
+    name: Generate output
     runs-on: ubuntu-latest
-
     # Map the job outputs to step outputs
     outputs:
       output1: ${{ steps.step1.outputs.firstword }}
       output2: ${{ steps.step2.outputs.secondword }}
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - id: step1
         run: echo "firstword=hello" >> $GITHUB_OUTPUT
