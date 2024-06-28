@@ -1,0 +1,4 @@
+#!/bin/bash
+# Ваша команда
+echo "Running pre-commit hook"
+exit 1
